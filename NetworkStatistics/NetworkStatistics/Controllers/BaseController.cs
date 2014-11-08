@@ -4,6 +4,7 @@
 
     using NetworkStatistics.DAL;
 
+    [RequireHttps]
     public class BaseController : Controller
     {
         public BaseController()

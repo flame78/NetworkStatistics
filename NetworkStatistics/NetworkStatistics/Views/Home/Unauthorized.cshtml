@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Permission Denied";
 }
-<h2>@ViewBag.Title.</h2>
+<h2 class="text-danger">@ViewBag.Title.</h2>
 <p>Sorry. You are trying to access a web page without proper authorization.</p>
 @if (Request.IsAuthenticated)
 {

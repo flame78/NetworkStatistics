@@ -11,7 +11,7 @@ using NetworkStatistics.Models;
 namespace NetworkStatistics.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         public ManageController()
         {

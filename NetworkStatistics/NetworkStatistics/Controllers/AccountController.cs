@@ -13,7 +13,7 @@ using NetworkStatistics.Models;
 namespace NetworkStatistics.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private ApplicationUserManager _userManager;
 

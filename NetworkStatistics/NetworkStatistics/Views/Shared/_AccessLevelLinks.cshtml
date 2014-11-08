@@ -14,12 +14,18 @@
                 </ul>
             </li>
         </ul>
-            }
-            if (User.IsInRole(GlobalConstants.AdministratorRole))
-            {
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Users", "Index", "Users")</li>
-            </ul>
-            }
-            }
+    }
+    if (User.IsInRole(GlobalConstants.AdministratorRole))
+    {
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Users <span class="caret"></span></a>
+                <ul class="dropdown-menu" aria-labelledby="themes">
+                    <li>@Html.ActionLink("List", "Index", "Users")</li>
+                    <li>@Html.ActionLink("Create New", "Create", "Users")</li>
+                </ul>
+            </li>
+        </ul>
+    }
+}
 

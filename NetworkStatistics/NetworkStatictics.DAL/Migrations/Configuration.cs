@@ -11,7 +11,18 @@ namespace NetworkStatistics.DAL.Migrations
 
     internal sealed class Configuration : DbMigrationsConfiguration<NetworkStatisticsDbContext>
     {
+        
         private const string DefaultPassword = "123456";
+
+        private const string SeedAdmin = "admin@firm.bg";
+
+        private const string SeedBoss = "boss@firm.bg";
+
+        private const string SeedLogger = "headquarter_logger@firm.bg";
+
+        private const string SeedUser = "1@1.bg";
+
+
 
         public Configuration()
         {
@@ -41,41 +52,41 @@ namespace NetworkStatistics.DAL.Migrations
 
         private static void SeedUsers(NetworkStatisticsDbContext context)
         {
-            if (!context.Users.Any(u => u.UserName == "admin@firm.bg"))
+            if (!context.Users.Any(u => u.UserName == SeedAdmin))
             {
                 var store = new UserStore<ApplicationUser>(context);
                 var manager = new UserManager<ApplicationUser>(store);
-                var user = new ApplicationUser { UserName = "admin@firm.bg" };
+                var user = new ApplicationUser { UserName = SeedAdmin, Email = SeedAdmin };
 
                 manager.Create(user, DefaultPassword);
                 manager.AddToRole(user.Id, GlobalConstants.AdministratorRole);
             }
 
-            if (!context.Users.Any(u => u.UserName == "headquarter_logger@firm.bg"))
+            if (!context.Users.Any(u => u.UserName == SeedLogger))
             {
                 var store = new UserStore<ApplicationUser>(context);
                 var manager = new UserManager<ApplicationUser>(store);
-                var user = new ApplicationUser { UserName = "headquarter_logger@firm.bg" };
+                var user = new ApplicationUser { UserName =SeedLogger, Email = SeedLogger};
 
                 manager.Create(user,DefaultPassword);
                 manager.AddToRole(user.Id, GlobalConstants.LoggerRole);
             }
 
-            if (!context.Users.Any(u => u.UserName == "boss@firm.bg"))
+            if (!context.Users.Any(u => u.UserName == SeedBoss))
             {
                 var store = new UserStore<ApplicationUser>(context);
                 var manager = new UserManager<ApplicationUser>(store);
-                var user = new ApplicationUser { UserName = "boss@firm.bg" };
+                var user = new ApplicationUser { UserName = SeedBoss, Email = SeedBoss};
 
                 manager.Create(user,DefaultPassword);
                 manager.AddToRole(user.Id, GlobalConstants.BossRole);
             }
 
-            if (!context.Users.Any(u => u.UserName == "1@1.bg"))
+            if (!context.Users.Any(u => u.UserName == SeedUser))
             {
                 var store = new UserStore<ApplicationUser>(context);
                 var manager = new UserManager<ApplicationUser>(store);
-                var user = new ApplicationUser { UserName = "1@1.bg" };
+                var user = new ApplicationUser { UserName = SeedUser, Email = SeedUser};
 
                 manager.Create(user, DefaultPassword);
             }

@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Permission Denied";
+}
+<h2>@ViewBag.Title.</h2>
+<p>Sorry. You are trying to access a web page without proper authorization.</p>
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        <p>You are currently logged in as @User.Identity.Name , and this account doesn't have permission to access this information.</p>
+        <p>
+            If you believe this is a mistake, try <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a> and then
+            @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) again.
+        </p>
+    }
+}
+else
+{
+    <p>You should try to @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) </p>
+}
+<p>After logging in with an authorized account, revisit the desired web page.</p>

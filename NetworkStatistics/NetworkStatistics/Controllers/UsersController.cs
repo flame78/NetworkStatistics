@@ -11,32 +11,33 @@ using NetworkStatistics.Models;
 
 namespace NetworkStatistics.Controllers
 {
+    using NetworkStatistics.Attributes;
     using NetworkStatistics.Resources;
 
-    [Authorize(Roles = GlobalConstants.AdministratorRole )]
-    public class UsersController : Controller
+    [CustomAuthorize(Roles = GlobalConstants.AdministratorRole)]
+    public class UsersController : BaseController
     {
-        private NetworkStatisticsDbContext db = new NetworkStatisticsDbContext();
+     //   private NetworkStatisticsDbContext db = new NetworkStatisticsDbContext();
 
         // GET: Users
         public ActionResult Index()
         {
-            return View(db.Consumers.ToList());
+            return View(NetworkStatisticsData.ApplicationUsers.All().ToList());
         }
 
         // GET: Users/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Consumer user = db.Consumers.Find(id);
-            if (user == null)
+            ApplicationUser applicationUser = NetworkStatisticsData.ApplicationUsers.Find(id);
+            if (applicationUser == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(applicationUser);
         }
 
         // GET: Users/Create
@@ -50,31 +51,31 @@ namespace NetworkStatistics.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Mac,UserAgent,Name")] Consumer user)
+        public ActionResult Create([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
         {
             if (ModelState.IsValid)
             {
-                db.Consumers.Add(user);
-                db.SaveChanges();
+                NetworkStatisticsData.ApplicationUsers.Add(applicationUser);
+                NetworkStatisticsData.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(user);
+            return View(applicationUser);
         }
 
         // GET: Users/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Consumer user = db.Consumers.Find(id);
-            if (user == null)
+            ApplicationUser applicationUser = NetworkStatisticsData.ApplicationUsers.Find(id);
+            if (applicationUser == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(applicationUser);
         }
 
         // POST: Users/Edit/5
@@ -82,50 +83,50 @@ namespace NetworkStatistics.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Mac,UserAgent,Name")] Consumer user)
+        public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
+                NetworkStatisticsData.ApplicationUsers.Update(applicationUser);
+                NetworkStatisticsData.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(user);
+            return View(applicationUser);
         }
 
         // GET: Users/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Consumer user = db.Consumers.Find(id);
-            if (user == null)
+            ApplicationUser applicationUser = NetworkStatisticsData.ApplicationUsers.Find(id);
+            if (applicationUser == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(applicationUser);
         }
 
         // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string id)
         {
-            Consumer user = db.Consumers.Find(id);
-            db.Consumers.Remove(user);
-            db.SaveChanges();
+            ApplicationUser applicationUser = NetworkStatisticsData.ApplicationUsers.Find(id);
+            NetworkStatisticsData.ApplicationUsers.Delete(applicationUser);
+            NetworkStatisticsData.SaveChanges();
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+       // protected override void Dispose(bool disposing)
+       // {
+       //     if (disposing)
+       //     {
+       ////         db.Dispose();
+       //     }
+       //     base.Dispose(disposing);
+       // }
     }
 }

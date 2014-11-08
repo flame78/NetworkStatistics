@@ -7,7 +7,7 @@
 
     public interface INetworkStatisticsDbContext
     {
-        IDbSet<User> Users { get; set; }
+        IDbSet<Consumer> Consumers { get; set; }
 
         IDbSet<Record> Records { get; set; }
 

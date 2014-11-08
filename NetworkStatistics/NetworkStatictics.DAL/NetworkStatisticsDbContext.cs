@@ -15,7 +15,7 @@
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<NetworkStatisticsDbContext, Configuration>());
         }
 
-        public IDbSet<User> Users { get; set; }
+        public IDbSet<Consumer> Consumers { get; set; }
 
         public IDbSet<Record> Records { get; set; }
 

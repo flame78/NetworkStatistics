@@ -34,11 +34,11 @@ namespace NetworkStatistics.DAL
             }
         }
 
-        public IRepository<User> Users
+        public IRepository<Consumer> Consumers
         {
             get
             {
-                return this.GetRepository<User>();
+                return this.GetRepository<Consumer>();
             }
         }
 

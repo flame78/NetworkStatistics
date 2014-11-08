@@ -11,6 +11,9 @@ using NetworkStatistics.Models;
 
 namespace NetworkStatistics.Controllers
 {
+    using NetworkStatistics.Resources;
+
+    [Authorize(Roles = GlobalConstants.AdministratorRole )]
     public class UsersController : Controller
     {
         private NetworkStatisticsDbContext db = new NetworkStatisticsDbContext();
@@ -18,7 +21,7 @@ namespace NetworkStatistics.Controllers
         // GET: Users
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            return View(db.Consumers.ToList());
         }
 
         // GET: Users/Details/5
@@ -28,7 +31,7 @@ namespace NetworkStatistics.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
+            Consumer user = db.Consumers.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -47,11 +50,11 @@ namespace NetworkStatistics.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Mac,UserAgent,Name")] User user)
+        public ActionResult Create([Bind(Include = "Id,Mac,UserAgent,Name")] Consumer user)
         {
             if (ModelState.IsValid)
             {
-                db.Users.Add(user);
+                db.Consumers.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -66,7 +69,7 @@ namespace NetworkStatistics.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
+            Consumer user = db.Consumers.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -79,7 +82,7 @@ namespace NetworkStatistics.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Mac,UserAgent,Name")] User user)
+        public ActionResult Edit([Bind(Include = "Id,Mac,UserAgent,Name")] Consumer user)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +100,7 @@ namespace NetworkStatistics.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
+            Consumer user = db.Consumers.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -110,8 +113,8 @@ namespace NetworkStatistics.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            User user = db.Users.Find(id);
-            db.Users.Remove(user);
+            Consumer user = db.Consumers.Find(id);
+            db.Consumers.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

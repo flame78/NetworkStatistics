@@ -6,7 +6,7 @@
     {
         public int Id { get; set; }
 
-        public virtual User User{get;set;}
+        public virtual Consumer Consumer{get;set;}
 
         public DateTime Date { get; set; }
 

@@ -70,6 +70,10 @@
       <Project>{D43EF77E-A236-4E26-908F-E228A1A3EFD8}</Project>
       <Name>NetworkStatistics.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NetworkStatistics.Resources\NetworkStatistics.Resources.csproj">
+      <Project>{db2e151f-c74b-4313-84a3-669272067892}</Project>
+      <Name>NetworkStatistics.Resources</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

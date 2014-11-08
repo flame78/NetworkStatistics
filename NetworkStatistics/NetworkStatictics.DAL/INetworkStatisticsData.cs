@@ -7,7 +7,7 @@
     {
         IRepository<ApplicationUser> ApplicationUsers { get; }
 
-        IRepository<User> Users { get; }
+        IRepository<Consumer> Consumers { get; }
 
         IRepository<Host> Hosts { get; }
 

@@ -235,6 +235,7 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Shared\_AccessLevelLinks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -254,6 +255,10 @@
     <ProjectReference Include="..\NetworkStatistics.Models\NetworkStatistics.Models.csproj">
       <Project>{d43ef77e-a236-4e26-908f-e228a1a3efd8}</Project>
       <Name>NetworkStatistics.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NetworkStatistics.Resources\NetworkStatistics.Resources.csproj">
+      <Project>{db2e151f-c74b-4313-84a3-669272067892}</Project>
+      <Name>NetworkStatistics.Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
